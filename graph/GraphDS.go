@@ -53,7 +53,7 @@ func (g *Graph) AddEdge(n1, n2 string, w int) {
 
 }
 
-func (g *Graph) removeNode(node string) {
+func (g *Graph) RemoveNode(node string) {
 	for i := 0; i < len(g.edges); i++ {
 		if g.edges[i].startNode == node || g.edges[i].endNode == node {
 			g.edges = append(g.edges[:i], g.edges[i+1:]...)
@@ -63,7 +63,7 @@ func (g *Graph) removeNode(node string) {
 	delete(g.Nodes, node)
 }
 
-func (g *Graph) removeEdge(start, end string, weight int) {
+func (g *Graph) RemoveEdge(start, end string, weight int) {
 	for i := range g.edges {
 		if g.edges[i].startNode == start && g.edges[i].endNode == end && g.edges[i].weight == weight {
 			g.edges = append(g.edges[:i], g.edges[i+1:]...)
@@ -71,7 +71,7 @@ func (g *Graph) removeEdge(start, end string, weight int) {
 	}
 }
 
-func (g *Graph) getOutNodes(n *Node) []*Node {
+func (g *Graph) GetOutNodes(n *Node) []*Node {
 	var outNodes []*Node
 	for i := range g.edges {
 		if g.edges[i].startNode == n.value {
@@ -79,6 +79,16 @@ func (g *Graph) getOutNodes(n *Node) []*Node {
 		}
 	}
 	return outNodes
+}
+
+func (g *Graph) GetInNodes(n *Node) []*Node {
+	var inNodes []*Node
+	for i := range g.edges {
+		if g.edges[i].endNode == n.value {
+			inNodes = append(inNodes, g.findNode(g.edges[i].startNode))
+		}
+	}
+	return inNodes
 }
 
 func (g *Graph) PrintNodes() {
@@ -117,7 +127,7 @@ func (g *Graph) dfsHelper(end *Node, visited []string, stack S.Stack) []string {
 		return visited
 	}
 
-	outNodes := g.getOutNodes(current)
+	outNodes := g.GetOutNodes(current)
 
 	for adj := range outNodes {
 		visitedB := false
