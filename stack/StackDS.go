@@ -13,5 +13,6 @@ func (s *Stack) Push(a string) {
 func (s *Stack) Pop() string {
 	temp := s.Values[len(s.Values)-1]
 	s.Values = s.Values[:len(s.Values)-1]
+	s.Top -= 1
 	return temp
 }

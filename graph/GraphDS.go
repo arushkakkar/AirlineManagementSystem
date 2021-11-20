@@ -53,6 +53,24 @@ func (g *Graph) AddEdge(n1, n2 string, w int) {
 
 }
 
+func (g *Graph) removeNode(node string) {
+	for i := 0; i < len(g.edges); i++ {
+		if g.edges[i].startNode == node || g.edges[i].endNode == node {
+			g.edges = append(g.edges[:i], g.edges[i+1:]...)
+			i -= 1
+		}
+	}
+	delete(g.Nodes, node)
+}
+
+func (g *Graph) removeEdge(start, end string, weight int) {
+	for i := range g.edges {
+		if g.edges[i].startNode == start && g.edges[i].endNode == end && g.edges[i].weight == weight {
+			g.edges = append(g.edges[:i], g.edges[i+1:]...)
+		}
+	}
+}
+
 func (g *Graph) getOutNodes(n *Node) []*Node {
 	var outNodes []*Node
 	for i := range g.edges {
@@ -118,5 +136,5 @@ func (g *Graph) dfsHelper(end *Node, visited []string, stack S.Stack) []string {
 		return g.dfsHelper(end, visited, stack)
 	}
 
-	return nil
+	return visited
 }

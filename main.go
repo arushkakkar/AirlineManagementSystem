@@ -20,5 +20,5 @@ func main() {
 	roster.AddEdge("LAX", "ONT", 100)
 	roster.AddEdge("ONT", "IND", 100)
 
-	fmt.Println(roster.DFS("JFK", "IND"))
+	fmt.Println(roster.DFS("LAX", "IND"))
 }
