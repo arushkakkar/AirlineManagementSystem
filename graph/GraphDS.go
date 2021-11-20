@@ -1,7 +1,7 @@
 package graph
 
 import (
-	S "4080Stuff/stack"
+	S "AirlineManagementSystem/stack"
 	"fmt"
 )
 
