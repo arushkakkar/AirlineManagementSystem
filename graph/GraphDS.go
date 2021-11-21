@@ -31,14 +31,14 @@ func (g *Graph) AddNode(code string) {
 	}
 }
 
-func (g *Graph) findNode(code string) *Node {
+func (g *Graph) FindNode(code string) *Node {
 	return g.Nodes[code]
 }
 
 func (g *Graph) AddEdge(n1, n2 string, w int) {
 
-	from := g.findNode(n1)
-	to := g.findNode(n2)
+	from := g.FindNode(n1)
+	to := g.FindNode(n2)
 
 	edge := Edge{
 		weight:    w,
@@ -71,24 +71,44 @@ func (g *Graph) RemoveEdge(start, end string, weight int) {
 	}
 }
 
-func (g *Graph) GetOutNodes(n *Node) []*Node {
+func (g *Graph) getOutNodes(n *Node) []*Node {
 	var outNodes []*Node
 	for i := range g.edges {
 		if g.edges[i].startNode == n.value {
-			outNodes = append(outNodes, g.findNode(g.edges[i].endNode))
+			outNodes = append(outNodes, g.FindNode(g.edges[i].endNode))
 		}
 	}
 	return outNodes
 }
 
-func (g *Graph) GetInNodes(n *Node) []*Node {
+func (g *Graph) getInNodes(n *Node) []*Node {
 	var inNodes []*Node
 	for i := range g.edges {
 		if g.edges[i].endNode == n.value {
-			inNodes = append(inNodes, g.findNode(g.edges[i].startNode))
+			inNodes = append(inNodes, g.FindNode(g.edges[i].startNode))
 		}
 	}
 	return inNodes
+}
+
+func (g *Graph) getOutEdges(s string) []Edge {
+	var outEdges []Edge
+	for i := range g.edges {
+		if g.edges[i].startNode == s {
+			outEdges = append(outEdges, g.edges[i])
+		}
+	}
+	return outEdges
+}
+
+func (g *Graph) getInEdges(s string) []Edge {
+	var inEdges []Edge
+	for i := range g.edges {
+		if g.edges[i].endNode == s {
+			inEdges = append(inEdges, g.edges[i])
+		}
+	}
+	return inEdges
 }
 
 func (g *Graph) PrintNodes() {
@@ -104,8 +124,8 @@ func (g *Graph) PrintEdges() {
 }
 
 func (g *Graph) DFS(s, e string) []string {
-	start := g.findNode(s)
-	end := g.findNode(e)
+	start := g.FindNode(s)
+	end := g.FindNode(e)
 
 	visited := make([]string, 1)
 	stackArray := make([]string, 1)
@@ -122,12 +142,12 @@ func (g *Graph) DFS(s, e string) []string {
 }
 
 func (g *Graph) dfsHelper(end *Node, visited []string, stack S.Stack) []string {
-	current := g.findNode(stack.Values[stack.Top])
+	current := g.FindNode(stack.Values[stack.Top])
 	if end.value == current.value {
 		return visited
 	}
 
-	outNodes := g.GetOutNodes(current)
+	outNodes := g.getOutNodes(current)
 
 	for adj := range outNodes {
 		visitedB := false

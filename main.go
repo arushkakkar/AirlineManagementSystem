@@ -6,29 +6,53 @@ import (
 )
 
 //functions used for each option, can be modified according to the ops in graph
-func airPortInformation(flights g.Graph) {
-	//Ask for airport name (three letter code like "LAX" and use g.FindNode(name) to find airport and display its info)
-
+func airportInformation(flights g.Graph) {
+	fmt.Println("\nPlease enter the airport name[3 letter code]:")
+	var name string
+	fmt.Scanln(&name)
+	node := flights.FindNode(name)
+	fmt.Println("Airport Info:")
+	fmt.Println(node)
 }
 
-func addAirPort(flights g.Graph) {
-	//Ask for airport name and use flights.AddNode(name) to add airport
-
+func addAirport(flights g.Graph) {
+	fmt.Println("\nPlease enter the airport name:")
+	var name string
+	fmt.Scanln(&name)
+	flights.AddNode(name)
 }
 
-func removeAirPort(flights g.Graph) {
-	//Ask for airport name and use flights.RemoveNode(name) to remove airport
-
+func removeAirport(flights g.Graph) {
+	fmt.Println("\nPlease enter the airport name:")
+	var name string
+	fmt.Scanln(&name)
+	flights.RemoveNode(name)
 }
 
 func addFlight(flights g.Graph) {
-	//Ask for from and to airports and price of flight (integer) and use flights.AddEdge(from, to, price) to add flight
-
+	fmt.Println("\nPlease enter the name of the airport you are comming from :")
+	var from string
+	fmt.Scanln(&from)
+	fmt.Println("\nPlease enter the name of the airport you are going to:")
+	var to string
+	fmt.Scanln(&to)
+	fmt.Println("\nPlease enter the price of the flight")
+	var price int
+	fmt.Scanln(&price)
+	flights.AddEdge(from, to, price)
 }
 
 func removeFlight(flights g.Graph) {
-	//Ask for from and to airports and price of flight (integer) and use flights.RemoveEdge(from, to, price) to add flight
-
+	fmt.Println("\nPlease enter the name of the airport you are comming from:")
+	var from string
+	fmt.Scanln(&from)
+	fmt.Println("\nPlease enter the name of the airport you are going to:")
+	var to string
+	fmt.Scanln(&to)
+	fmt.Println("\nPlease enter the price of the flight:")
+	var price int
+	fmt.Scanf("%d", &price)
+	flights.RemoveEdge(from, to, price)
 }
 
 func orderToVisit(flights g.Graph) {
@@ -37,12 +61,15 @@ func orderToVisit(flights g.Graph) {
 }
 
 func getFlightsFrom(flights g.Graph) {
-	//Pls just implement asking for an airport name, i will do the rest later
-
+	fmt.Println("\nPlease enter the airport name:")
+	var name string
+	fmt.Scanln(&name)
 }
 
 func getFlightsTo(flights g.Graph) {
-	//Pls just implement asking for an airport name, i will do the rest later
+	fmt.Println("\nPlease enter the airport name:")
+	var name string
+	fmt.Scanln(&name)
 }
 
 func menu() {
@@ -70,11 +97,11 @@ func menu() {
 
 		switch input {
 		case "1":
-			airPortInformation(flights)
+			airportInformation(flights)
 		case "2":
-			addAirPort(flights)
+			addAirport(flights)
 		case "3":
-			removeAirPort(flights)
+			removeAirport(flights)
 		case "4":
 			addFlight(flights)
 		case "5":
