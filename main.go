@@ -21,7 +21,8 @@ func addAirport(flights g.Graph) {
 	var name string
 	fmt.Scanln(&name)
 	flights.AddNode(name)
-	fmt.Println("done.\n")
+	fmt.Println("done.")
+	fmt.Println()
 }
 
 func removeAirport(flights g.Graph) {
@@ -45,7 +46,8 @@ func addFlight(flights *g.Graph) {
 	fmt.Scanln(&price)
 
 	flights.AddEdge(from, to, price)
-	fmt.Println("done.\n")
+	fmt.Println("done.")
+	fmt.Println()
 }
 
 func removeFlight(flights *g.Graph) {
