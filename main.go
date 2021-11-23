@@ -12,8 +12,8 @@ func airportInformation(flights g.Graph) {
 	var name string
 	fmt.Scanln(&name)
 	node := flights.FindNode(name)
-	fmt.Println("Airport Info:")
-	fmt.Println(node)
+	fmt.Println("\nAirport Info:")
+	fmt.Println("Airport " + node.Value + "\n# Flights in: " + strconv.Itoa(node.InDegree) + "\n# Flights out: " + strconv.Itoa(node.OutDegree) + "\n\n")
 }
 
 func addAirport(flights g.Graph) {
@@ -115,7 +115,7 @@ func menu() {
 	fmt.Println("2. Add a airport")
 	fmt.Println("3. Remove a airport")
 	fmt.Println("4. Add a flight from one airport to another airport")
-	fmt.Println("5. Find an order to visit all airports starting from an airport")
+	fmt.Println("5. Does a path exist between two Airports?")
 	fmt.Println("6. Get all Flights from an Airport")
 	fmt.Println("7. Get all Flights to an Airport")
 	fmt.Println("8. Remove Flight")
@@ -151,7 +151,7 @@ func menu() {
 		fmt.Println("2. Add a airport")
 		fmt.Println("3. Remove a airport")
 		fmt.Println("4. Add a flight from one airport to another airport")
-		fmt.Println("5. Find an order to visit all airports starting from an airport")
+		fmt.Println("5. Does a path exist between two Airports?")
 		fmt.Println("6. Get all Flights from an Airport")
 		fmt.Println("7. Get all Flights to an Airport")
 		fmt.Println("8. Remove Flight")

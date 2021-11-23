@@ -7,8 +7,8 @@ import (
 
 type Node struct {
 	Value     string
-	inDegree  int
-	outDegree int
+	InDegree  int
+	OutDegree int
 }
 
 type Edge struct {
@@ -26,8 +26,8 @@ func (g *Graph) AddNode(code string) {
 
 	g.Nodes[code] = &Node{
 		Value:     code,
-		inDegree:  0,
-		outDegree: 0,
+		InDegree:  0,
+		OutDegree: 0,
 	}
 }
 
@@ -48,8 +48,8 @@ func (g *Graph) AddEdge(n1, n2 string, w int) {
 
 	g.Edges = append(g.Edges, edge)
 
-	from.outDegree += 1
-	to.inDegree += 1
+	from.OutDegree += 1
+	to.InDegree += 1
 }
 
 func (g *Graph) RemoveNode(node string) {
